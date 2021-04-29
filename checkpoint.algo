@@ -1,11 +1,19 @@
-PROCEDURE dot_porduct(ps:INTEGER; v1,v2:ARRAY_OF INTEGER[100][100];)
+PROCEDURE dot_porduct(v1,v2:ARRAY_OF INTEGER[100][100];)
 VAR
     j,i:INTEGER;
     ps:INTEGER:=0;
 BEGIN
+    FOR i FROM 0 TO 2n-1 STEP 2  DO
     FOR j FROM 0 TO 2   DO
-        ps:=ps+ v1[i][j]* v2[i][j];
+        ps:= v1[i][j]* v2[i][j];
     END_FOR
+    IF (ps=0)) THEN
+            Write(v1[i],v2[i+1],"are orthogonal");
+        END_IF
+        ELSE 
+        Write(v1[i],v2[i+1],"are not orthogonal");
+    END_FOR
+
 END
 //-------------------------------------------------------------------------------
 
@@ -14,21 +22,16 @@ ALGORITHM orthogonal
 VAR
     k,l:INTEGER;
     tab:ARRAY_OF INTEGER[100][100]
-    dot:INTEGER:=0;
+    
 BEGIN
     read(n);
     FOR k FROM 0 TO  2n -1 step  DO
         FOR l FROM 0 TO 2   DO
-            read(tab[i][j]);
+            read(tab[k][l]);
         END_FOR
     END_FOR
-    FOR k FROM 0 TO 2n-1 STEP 2  DO
-        IF ((dot_porduct(dot,tab[k][l],tab[k+1][l])=0)) THEN
-            Write(tab[k],tab[k+1],"are orthogonal");
-        END_IF
-        ELSE 
-        Write(tab[k],tab[k+1],"are not orthogonal");
-    END_FOR
+    dot_porduct(tab[k][l],tab[k+1][l]);
+    
 END
 //-----------------------------------------------------------------------------
 FUNCTION func() : INTEGER;
@@ -53,7 +56,7 @@ BEGIN
     read(n);
     FOR k FROM 0 TO  2n -1 step  DO
         FOR l FROM 0 TO 2   DO
-            read(tab[i][j]);
+            read(tab[k][l]);
         END_FOR
     END_FOR
     FOR k FROM 0 TO 2n-1 STEP 2  DO
